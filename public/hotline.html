@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hotline</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+ 
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="main-tab">
+		<!-- <div class="tab">
+		  <button id="hotline" class="tablinks">Hotline</button>
+		  <button id="faq" class="tablinks">FAQ</button>
+		  <button id="report" class="tablinks">Report</button>
+		</div> -->
+		<div class="tab-content">
+			<div class="tab-section tab-hotline">
+				<h1>Emergency Numbers</h1>
+				<ul class="call-list">
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  <li><a href="tel:5554280940">ABCD <img class="call-icon" src="img/call.svg"/></a></li>
+				  
+				</ul>  
+			</div>
+		</div>
+	</div>
+	
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){	
+		$('#feedback_form').click(function() {
+    var formData = $('#myForm').serialize();
+    console.log('Posting the following: ', formData);
+    
+    $.ajax({
+      url: 'http://dev.ekta.one:3001/admin/v1/user/list',
+      data: formData,
+      type: 'post',
+      dataType: 'json',
+      success: function(data) {
+        console.log('submited data');
+      }
+    });
+  });
+	  
+	 $("#faq").click(function(){
+	  $(".tab-content").addClass('focus');
+	  $(".tab-faq").show();
+	});
+	 $("#report").click(function(){
+	  $(".tab-content").addClass('focus');
+	  $(".tab-report").show();
+	  $(".main-sub-tab").show();
+	 });
+	 $("#good").click(function(){
+	  
+	  $(".feedback").show();
+	 
+	 });
+	 $("#notwell").click(function(){
+	  $(".inner-tab").addClass('add');
+	  $(".inner-tab").show();
+	 
+	 });
+});
+</script>
+</body>
+
+</html>

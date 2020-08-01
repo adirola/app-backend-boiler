@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Feedback</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+ 
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="main-tab">	
+		<div class="tab-content">
+			<div class="main-sub-tab">
+				<div class="tab-section tab-report">
+					<div class="feedback">
+						<h3 class="feedback-title">How are you feeling today</h3>
+						 <div id="good" class="feedback-link">
+							<img src="img/smile.svg" class="feedback-icon"/>
+						 <h6>Good</h6></div>
+						<div id="notwell" class="feedback-link">
+						<img src="img/sad.svg" class="feedback-icon"/>
+						<h6>Not Well</h6></div>
+						<p class="feedback" style="display:none; text-align:center;">Thank you for your Feedback.</p>
+					</div>
+				</div>
+				<div class="tab-section inner-tab">
+					<h3 class="feedback-title">Are you feeling any of these symptoms</h3>
+					<form id="myForm">
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input"  id="fever" value="fever" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="fever">Fever</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="wetcough" value="wetcough" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="wetcough">Wet Cough</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="drycough" value="drycough" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="drycough">Dry Cough</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="sorethroat" value="sorethroat" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="sorethroat">Sore Throat</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="runnynose" value="runnynose" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="runnynose">Runny Nose</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="nasalcongestion" value="nasalcongestion" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="nasalcongestion">Nasal Congestion</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="lossofappetite" value="lossofappetite" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="lossofappetite">Loss of Appetite</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="fatigue" value="fatigue" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="fatigue">Fatigue</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="muscleandjointpain" value="muscleandjointpain" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="muscleandjointpain">Muscle and Joint Pain</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="shortnessofbreath" value="shortnessofbreath" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="shortnessofbreath">Shortness of Breath</label>
+						</div>
+						<div class="custom-control custom-checkbox mb-4">
+						  <input type="checkbox" class="custom-control-input" id="confusion" value="confusion" name="symptoms[]">
+						  <label class="custom-control-label label-name" for="confusion">Confusion</label>
+						</div>
+						<div id="submit">
+						 <img src="img/submit.png" style="cursor: pointer;" class="feedback-icon"/>
+						</div>
+					 </form>
+					 <span class="showalert" style="display:none">You must check at least one checkbox.</span>
+					 <span class="successmsg" style="display:none">Successfully Submitted Form</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){	
+		$('#submit').click(function() {
+		checked = $("input[type=checkbox]:checked").length;
+		if(!checked) {
+        $(".showalert").show();
+        return false;
+      }else{
+		var path = window.location.search;
+		var pathArr = path.split('=');
+		var token = pathArr[pathArr.length-1];
+		if(token && token!=''){
+			var formData = {
+			token: token,//token,
+			symptoms: []
+		  }
+		  $('#myForm').serializeArray().map(function(obj){
+			formData.symptoms.push(obj.value);
+			});
+		  $.ajax({
+		  url: 'http://covidsos.southindia.cloudapp.azure.com:3001/api/v1/app/covid/updateUser',
+		  data: formData,
+			type: 'POST',
+			dataType: 'JSON',
+		  success: function(data) {
+			$(".successmsg").show();
+		  }
+		});
+		}
+	  } 
+  });
+  
+  
+  
+	  $("#hotline").click(function(){
+	  $(".tab-content").addClass('focus');
+	  $(".tab-hotline").show();
+	});
+	 $("#faq").click(function(){
+	  $(".tab-content").addClass('focus');
+	  $(".tab-faq").show();
+	});
+	 $("#report").click(function(){
+	  $(".tab-content").addClass('focus');
+	  $(".tab-report").show();
+	  $(".main-sub-tab").show();
+	 });
+	 $("#good").click(function(){
+	  
+	  $(".feedback").show();
+	 
+	 });
+	 $("#notwell").click(function(){
+	  $(".inner-tab").addClass('add');
+	  $(".inner-tab").show();
+	 
+	 });
+});
+</script>
+</body>
+
+</html>
