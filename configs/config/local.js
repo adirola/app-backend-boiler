@@ -7,10 +7,10 @@ let localConfig = {
 
     // SMS Provider
     DEV_OTP: false,
-    ACCOUNT_SID :'AC97919235c05365201d10f5a4e601d6d5' ,
-    ACCOUNT_AUTH_TOKEN :'642380ff8c7269d3b6f073919aae1de6',
+    ACCOUNT_SID :'' ,
+    ACCOUNT_AUTH_TOKEN :'',
     // JWT Configuration
-    JWT_SECRET: 'dev-secret-v4DJT2oDgUcVxn',
+    JWT_SECRET: '',
     JWT_EXPIRY: 120, //expiry in days
 
     ADMIN_KEY: 'covid!!!'
